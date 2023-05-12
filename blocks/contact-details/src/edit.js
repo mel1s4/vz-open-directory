@@ -31,23 +31,44 @@ import './editor.scss';
  */
 
 import { useSelect } from '@wordpress/data';
+import { SelectControl } from '@wordpress/components';
 
-
-
-export default function Edit( { attributes } ) {
+export default function Edit( attributes ) {
 	const blockProps = useBlockProps();
 	const postId = attributes.context.postId;
 
-	const metaFieldValue = useSelect( ( select ) => {
-		const post = select( 'core' ).getEntityRecord( 'postType', 'vz-open-contact', postId );
-		return post;
+	const postData = useSelect( ( select ) => {
+		return select( 'core' ).getEntityRecord( 'postType', 'vz-open-contact', postId, 'vz_phone' );
 	}, [postId]);
 
-	const toString = JSON.stringify(metaFieldValue);
+	const postMeta = postData.meta;
+
+	const fieldOptions = [
+			{ value: 'vz_title', label: 'Title' },
+			{ value: 'vz_name', label: 'Name' },
+			{ value: 'vz_last_name', label: 'Last Name' },
+			{ value: 'vz_address', label: 'Address' },
+			{ value: 'vz_phone', label: 'Phone' },
+			{ value: 'vz_social_media', label: 'Social Media' },
+			{ value: 'vz_email', label: 'Email' },
+			{ value: 'vz_external_links', label: 'External Linkx' },
+	];
+
+	const { field } = attributes.attributes;
+
+	const onChangeField = (newField) => {
+		attributes.setAttributes({ field: newField });
+	};
 
 	return (
 		<div { ...blockProps }>
-			<p><b>success!</b> {toString} </p>
+			<SelectControl
+					label="Select a field"
+					value={field}
+					options={fieldOptions}
+					onChange={onChangeField}
+			/>
+			{ postMeta[field] }
 		</div>
 	);
 }

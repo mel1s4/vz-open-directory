@@ -10,6 +10,7 @@
 
 include 'helpers.php';
 include __DIR__ . '/blocks/contact-details/contact-details.php';
+// include __DIR__ . '/blocks/contact-details/contact-detail.php';
 
 add_action( 'init', 'create_vz_contact_post_type' );
 function create_vz_contact_post_type() {
@@ -29,15 +30,16 @@ function create_vz_contact_post_type() {
     )
   );
 
-  register_post_meta(
-    'vz-open-contact',
-    'vz_name',
-    [
-        'show_in_rest' => true,
-        'single'       => true,
-        'type'         => 'string',
-    ]
-  );
+  $attr = [
+    'show_in_rest' => true,
+    'single'       => true,
+    'type'         => 'string',
+  ];
+  $post_type = 'vz-open-contact';
+  $fields = "vz_title,vz_name,vz_last_name,vz_description,vz_address,vz_phone,vz_social_media,vz_email,vz_external_links";
+  foreach(explode(',', $fields) as $field) {
+    register_post_meta( $post_type, $field, $attr );
+  }
 }
 
 

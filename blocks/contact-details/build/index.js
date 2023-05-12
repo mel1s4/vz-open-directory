@@ -21,6 +21,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./editor.scss */ "./src/editor.scss");
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
 /* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__);
 
 /**
  * Retrieves the translation of text.
@@ -55,18 +57,53 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 
-function Edit(_ref) {
-  let {
-    attributes
-  } = _ref;
+
+function Edit(attributes) {
   const blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps)();
   const postId = attributes.context.postId;
-  const metaFieldValue = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_4__.useSelect)(select => {
-    const post = select('core').getEntityRecord('postType', 'vz-open-contact', postId);
-    return post;
+  const postData = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_4__.useSelect)(select => {
+    return select('core').getEntityRecord('postType', 'vz-open-contact', postId, 'vz_phone');
   }, [postId]);
-  const toString = JSON.stringify(metaFieldValue);
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", blockProps, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("p", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("b", null, "success!"), " ", toString, " "));
+  const postMeta = postData.meta;
+  const fieldOptions = [{
+    value: 'vz_title',
+    label: 'Title'
+  }, {
+    value: 'vz_name',
+    label: 'Name'
+  }, {
+    value: 'vz_last_name',
+    label: 'Last Name'
+  }, {
+    value: 'vz_address',
+    label: 'Address'
+  }, {
+    value: 'vz_phone',
+    label: 'Phone'
+  }, {
+    value: 'vz_social_media',
+    label: 'Social Media'
+  }, {
+    value: 'vz_email',
+    label: 'Email'
+  }, {
+    value: 'vz_external_links',
+    label: 'External Linkx'
+  }];
+  const {
+    field
+  } = attributes.attributes;
+  const onChangeField = newField => {
+    attributes.setAttributes({
+      field: newField
+    });
+  };
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", blockProps, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_5__.SelectControl, {
+    label: "Select a field",
+    value: field,
+    options: fieldOptions,
+    onChange: onChangeField
+  }), postMeta[field]);
 }
 
 /***/ }),
@@ -207,6 +244,16 @@ module.exports = window["wp"]["blocks"];
 
 /***/ }),
 
+/***/ "@wordpress/components":
+/*!************************************!*\
+  !*** external ["wp","components"] ***!
+  \************************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["components"];
+
+/***/ }),
+
 /***/ "@wordpress/data":
 /*!******************************!*\
   !*** external ["wp","data"] ***!
@@ -243,7 +290,7 @@ module.exports = window["wp"]["i18n"];
   \************************/
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"vz-open-directory/contact-details","version":"0.1.0","title":"Contact Details","category":"text","icon":"id-alt","description":"Displays meta fields details from contact post.","supports":{"html":false},"usesContext":["postId","postType"],"textdomain":"contact-details","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":2,"name":"vz-open-directory/contact-details","version":"0.1.0","title":"Contact Details","category":"text","icon":"id-alt","description":"Displays meta fields details from contact post.","supports":{"html":false},"usesContext":["postId","postType"],"textdomain":"contact-details","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","attributes":{"field":{"type":"string","default":"vz_name"}}}');
 
 /***/ })
 
