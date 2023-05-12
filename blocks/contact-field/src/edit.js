@@ -29,14 +29,13 @@ import './editor.scss';
  *
  * @return {WPElement} Element to render.
  */
-
 import { useSelect } from '@wordpress/data';
 import { SelectControl } from '@wordpress/components';
 
 export default function Edit( attributes ) {
 	const blockProps = useBlockProps();
 	const postId = attributes.context.postId;
-
+	const toString = JSON.stringify(attributes);
 	const postData = useSelect( ( select ) => {
 		return select( 'core' ).getEntityRecord( 'postType', 'vz-open-contact', postId, 'vz_phone' );
 	}, [postId]);
@@ -61,14 +60,16 @@ export default function Edit( attributes ) {
 	};
 
 	return (
-		<div { ...blockProps }>
-			<SelectControl
+		<p { ...blockProps }>
+			<div className="vz-open-contact-field-control">
+				<SelectControl
 					label="Select a field"
 					value={field}
 					options={fieldOptions}
 					onChange={onChangeField}
-			/>
+					/>
+			</div>
 			{ postMeta[field] }
-		</div>
+		</p>
 	);
 }

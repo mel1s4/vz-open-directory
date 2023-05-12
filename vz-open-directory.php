@@ -9,7 +9,7 @@
 **/
 
 include 'helpers.php';
-include __DIR__ . '/blocks/contact-details/contact-details.php';
+include __DIR__ . '/blocks/contact-field/contact-field.php';
 // include __DIR__ . '/blocks/contact-details/contact-detail.php';
 
 add_action( 'init', 'create_vz_contact_post_type' );

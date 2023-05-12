@@ -1,0 +1,22 @@
+/**
+ * The following styles get applied inside the editor only.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+.vz-open-contact-field-control {
+	position: relative;
+	> * {
+		background-color: white;
+		padding: 2px 4px;
+		border-radius: 4px;
+		box-shadow: 0px 2px 3px rgba(0,0,0,0.2);
+		position: absolute;
+		opacity: 0;
+		z-index: 10;
+		transition: 0.2s ease;
+		&:hover {
+			opacity: 1;
+		}
+	}
+}
