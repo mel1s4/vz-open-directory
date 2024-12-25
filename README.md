@@ -8,10 +8,10 @@ Also, for a local retailer, the functions of mapping and download contact list w
 
 
 # Feature List
-[ ] Registered visitors can add a contact
-[ ] Visitors can get registered just before adding a contact
-[ ] Users need to be validated before being able to manage contacts
-[ ] Contacts can be downloaded in a compatible format
-[ ] Contacts can be voted and their score would be accesible by registered users
-[ ] Contacts can store the same information as any other contact in any other contacts app
-[ ] Open contact location in Google Map
+[ ] Registered visitors can add a contact <br>
+[ ] Visitors can get registered just before adding a contact <br>
+[ ] Users need to be validated before being able to manage contacts <br>
+[ ] Contacts can be downloaded in a compatible format <br>
+[ ] Contacts can be voted and their score would be accesible by registered users <br>
+[ ] Contacts can store the same information as any other contact in any other contacts app <br>
+[ ] Open contact location in Google Map <br>
